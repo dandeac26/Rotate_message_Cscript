@@ -9,7 +9,7 @@
 #define min_upper 65
 #define min_lower 97
 
-int check_num(char *num){
+int check_num(char *num){ /// check if argv[2] is a number and if so, return it through r
     unsigned int r = 0;
     int p = 1;
     for(int i = strlen(num)-1; i >= 0;i--){
@@ -41,9 +41,6 @@ int main(int argc, char **argv){
     }
    
 
-    
-    
-
     char *buf = (char*) malloc(BUFSIZE);
     unsigned int ROT;
 
@@ -56,7 +53,7 @@ int main(int argc, char **argv){
     
     if(ROT < 1 || ROT > 25){
         printf("Invalid ROT value\n-has to be between 1-25\n");
-        return 2;
+        return 3;
     }
 
 
@@ -66,14 +63,14 @@ int main(int argc, char **argv){
     else
     if(strcmp(argv[1], "backward") == 0 || strcmp(argv[1], "-b") == 0){
          printf("    --Rot-%d backward --\nEnter message: ", ROT);
-         ROT = 26 - ROT;
+         ROT = 26 - ROT; // use the complement 
     }
        
-
-    scanf("%s", buf);
+    scanf("%s", buf);  /// read string ( NO SPACES !) 
 
     int decimal_value = -1;
     printf("result msg   : ");
+    
     for(int i = 0; i<strlen(buf); i++){
         if(isalpha(buf[i])){
 
