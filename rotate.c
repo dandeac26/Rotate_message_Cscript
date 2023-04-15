@@ -26,44 +26,35 @@ int check_num(char *num){ /// check if argv[2] is a number and if so, return it 
 }
 
 int main(int argc, char **argv){
-
-    if(argc == 2){
-        if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0){
-            printf("\n      -- ROT encoder/decoder -- \n\n    Program expects two arguments:\n      *direction: {forward,backward} or {-f, -b}\n      *number to rotate by\n\n    Example for rotating forward by 10: ./rotate -f 10\n\n    Program expects a string to be entered - no spaces as of this implementention are allowed\n");
-            return 0;
-        }
+    if(argc == 2 && strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0){
+        printf("\n      -- ROT encoder/decoder -- \n\n    Program expects two arguments:\n      *direction: {forward,backward} or {-f, -b}\n      *number to rotate by\n\n    Example for rotating forward by 10: ./rotate -f 10\n\n    Program expects a string to be entered - no spaces as of this implementention are allowed\n");
+        return 0;
     }
-    else{
-        if(argc < 3){
-                printf("\nProgram expects two arguments:\n    *direction: {forward,backward} or {-f, -b}\n    *number to rotate by\n\nUse --help for more info.\n\n");
-                return 1;
-            }
+    
+    if(argc < 3){
+        printf("\nProgram expects two arguments:\n    *direction: {forward,backward} or {-f, -b}\n    *number to rotate by\n\nUse --help for more info.\n\n");
+        return 1;
     }
-   
 
     char *buf = (char*) malloc(BUFSIZE);
-    unsigned int ROT;
-
-    ROT = check_num(argv[2]);
+    unsigned int ROT = check_num(argv[2]);
+    
     if(ROT == -1){
         printf("invalid rotation value, expected unsigned int\n");
         return 2;
     }
-
     
     if(ROT < 1 || ROT > 25){
         printf("Invalid ROT value\n-has to be between 1-25\n");
         return 3;
     }
 
-
     /// handling direction of rotation
     if(strcmp(argv[1], "forward") == 0 || strcmp(argv[1], "-f") == 0)
         printf("    --Rot-%d forward --\nEnter message: ", ROT);
-    else
-    if(strcmp(argv[1], "backward") == 0 || strcmp(argv[1], "-b") == 0){
-         printf("    --Rot-%d backward --\nEnter message: ", ROT);
-         ROT = 26 - ROT; // use the complement 
+    else if(strcmp(argv[1], "backward") == 0 || strcmp(argv[1], "-b") == 0){
+        printf("    --Rot-%d backward --\nEnter message: ", ROT);
+        ROT = 26 - ROT; // use the complement 
     }
        
     scanf("%s", buf);  /// read string ( NO SPACES !) 
