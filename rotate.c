@@ -73,20 +73,21 @@ int main(int argc, char **argv){
     
     for(int i = 0; i<strlen(buf); i++){
         if(isalpha(buf[i])){
-
-            decimal_value = (int)buf[i];
-
-            if(isupper(buf[i]) && (decimal_value + ROT > max_upper)){
-                printf("%c", (char)(min_upper + ROT-1 - max_upper + decimal_value));
-            }else 
-            if(islower(buf[i]) &&(decimal_value + ROT > max_lower)){
-                printf("%c", (char)(min_lower + ROT-1 - max_lower + decimal_value));
-            }else{
-                printf("%c", (char)(decimal_value + ROT));
-            }
-        }
-        else
             printf("%c", buf[i]);
+            continue;
+        }
+            
+        decimal_value = (int)buf[i];
+
+        if(isupper(buf[i]) && (decimal_value + ROT > max_upper))
+            printf("%c", (char)(min_upper + ROT-1 - max_upper + decimal_value));
+        
+        else if(islower(buf[i]) &&(decimal_value + ROT > max_lower))
+            printf("%c", (char)(min_lower + ROT-1 - max_lower + decimal_value));
+        
+        else
+            printf("%c", (char)(decimal_value + ROT));
+        
     }
     printf("\nCompleted Successfully\n");
     return 0;
